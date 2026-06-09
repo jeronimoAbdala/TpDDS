@@ -4,7 +4,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "dev": "nodemon --ignore src/db/database.json src/app.js",
     "seed": "node src/db/seed.js",
     "test": "jest --runInBand --forceExit"
   },

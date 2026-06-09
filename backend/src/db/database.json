@@ -109,54 +109,14 @@
   ],
   "solicitudes": [
     {
-      "id": 1,
+      "id": 8,
       "equipoId": 1,
-      "usuarioId": 1,
-      "fechaRetiro": "2026-06-10",
-      "fechaDevolucion": "2026-06-12",
-      "motivo": "Práctica de laboratorio",
-      "estado": "aprobada",
-      "autorizadoPor": 3
-    },
-    {
-      "id": 2,
-      "equipoId": 2,
       "usuarioId": 2,
-      "fechaRetiro": "2026-06-10",
-      "fechaDevolucion": "2026-06-11",
-      "motivo": "Trabajo de integración",
+      "fechaRetiro": "2026-06-25",
+      "fechaDevolucion": "2026-06-27",
+      "motivo": "Clase invertida",
       "estado": "pendiente",
       "autorizadoPor": null
-    },
-    {
-      "id": 3,
-      "equipoId": 3,
-      "usuarioId": 1,
-      "fechaRetiro": "2026-06-15",
-      "fechaDevolucion": "2026-06-16",
-      "motivo": "Presentación grupal",
-      "estado": "pendiente",
-      "autorizadoPor": null
-    },
-    {
-      "id": 4,
-      "equipoId": 4,
-      "usuarioId": 2,
-      "fechaRetiro": "2026-06-05",
-      "fechaDevolucion": "2026-06-07",
-      "motivo": "Exposición proyecto final",
-      "estado": "aprobada",
-      "autorizadoPor": 4
-    },
-    {
-      "id": 5,
-      "equipoId": 5,
-      "usuarioId": 1,
-      "fechaRetiro": "2026-06-01",
-      "fechaDevolucion": "2026-06-03",
-      "motivo": "Documentación de proceso",
-      "estado": "devuelta",
-      "autorizadoPor": 3
     },
     {
       "id": 6,
@@ -179,14 +139,74 @@
       "autorizadoPor": 3
     },
     {
-      "id": 8,
-      "equipoId": 1,
-      "usuarioId": 2,
-      "fechaRetiro": "2026-06-25",
-      "fechaDevolucion": "2026-06-27",
-      "motivo": "Clase invertida",
+      "id": 3,
+      "equipoId": 3,
+      "usuarioId": 1,
+      "fechaRetiro": "2026-06-15",
+      "fechaDevolucion": "2026-06-16",
+      "motivo": "Presentación grupal",
       "estado": "pendiente",
       "autorizadoPor": null
+    },
+    {
+      "id": 1,
+      "equipoId": 1,
+      "usuarioId": 1,
+      "fechaRetiro": "2026-06-10",
+      "fechaDevolucion": "2026-06-12",
+      "motivo": "Práctica de laboratorio",
+      "estado": "aprobada",
+      "autorizadoPor": 3
+    },
+    {
+      "id": 2,
+      "equipoId": 2,
+      "usuarioId": 2,
+      "fechaRetiro": "2026-06-10",
+      "fechaDevolucion": "2026-06-11",
+      "motivo": "Trabajo de integración",
+      "estado": "pendiente",
+      "autorizadoPor": null
+    },
+    {
+      "id": 12,
+      "equipoId": 8,
+      "usuarioId": 2,
+      "fechaRetiro": "2026-06-08",
+      "fechaDevolucion": "2026-06-09",
+      "motivo": "Entrevista técnica",
+      "estado": "aprobada",
+      "autorizadoPor": 3
+    },
+    {
+      "id": 4,
+      "equipoId": 4,
+      "usuarioId": 2,
+      "fechaRetiro": "2026-06-05",
+      "fechaDevolucion": "2026-06-07",
+      "motivo": "Exposición proyecto final",
+      "estado": "aprobada",
+      "autorizadoPor": 4
+    },
+    {
+      "id": 11,
+      "equipoId": 7,
+      "usuarioId": 1,
+      "fechaRetiro": "2026-06-02",
+      "fechaDevolucion": "2026-06-04",
+      "motivo": "Evaluación presencial",
+      "estado": "devuelta",
+      "autorizadoPor": 4
+    },
+    {
+      "id": 5,
+      "equipoId": 5,
+      "usuarioId": 1,
+      "fechaRetiro": "2026-06-01",
+      "fechaDevolucion": "2026-06-03",
+      "motivo": "Documentación de proceso",
+      "estado": "devuelta",
+      "autorizadoPor": 3
     },
     {
       "id": 9,
@@ -209,24 +229,14 @@
       "autorizadoPor": null
     },
     {
-      "id": 11,
-      "equipoId": 7,
-      "usuarioId": 1,
-      "fechaRetiro": "2026-06-02",
-      "fechaDevolucion": "2026-06-04",
-      "motivo": "Evaluación presencial",
-      "estado": "devuelta",
-      "autorizadoPor": 4
-    },
-    {
-      "id": 12,
-      "equipoId": 8,
-      "usuarioId": 2,
-      "fechaRetiro": "2026-06-08",
-      "fechaDevolucion": "2026-06-09",
-      "motivo": "Entrevista técnica",
-      "estado": "aprobada",
-      "autorizadoPor": 3
+      "id": 13,
+      "equipoId": 2,
+      "usuarioId": 3,
+      "fechaRetiro": "2026-06-11",
+      "fechaDevolucion": "2026-06-13",
+      "motivo": "adadasd",
+      "estado": "pendiente",
+      "autorizadoPor": null
     }
   ],
   "historial_solicitudes": [
@@ -353,6 +363,15 @@
       "usuarioId": 1,
       "accion": "creacion",
       "fechaHora": "2026-06-09T17:14:05.471Z",
+      "valorAnterior": null,
+      "valorNuevo": "{\"estado\":\"pendiente\"}"
+    },
+    {
+      "id": 15,
+      "solicitudId": 13,
+      "usuarioId": 3,
+      "accion": "creacion",
+      "fechaHora": "2026-06-09T17:27:07.023Z",
       "valorAnterior": null,
       "valorNuevo": "{\"estado\":\"pendiente\"}"
     }
