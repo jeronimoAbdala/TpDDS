@@ -1,20 +1,24 @@
 const request = require('supertest');
-const app = require('../src/app');
-const db = require('../src/config/database');
+const { createApp } = require('../src/app');
+const { init, run } = require('../src/infrastructure/database/connection');
 
+let app;
 let tokenAdmin, tokenUsuario, tokenEncargado;
 
 beforeAll(async () => {
+  await init();
+  app = createApp();
+
   const admin = await request(app).post('/api/auth/login').send({ email: 'admin@dds.com',  password: 'admin123' });
   const user  = await request(app).post('/api/auth/login').send({ email: 'ana@dds.com',    password: 'pass123'  });
   const enc   = await request(app).post('/api/auth/login').send({ email: 'carla@dds.com',  password: 'pass123'  });
-  tokenAdmin    = admin.body.token;
-  tokenUsuario  = user.body.token;
+  tokenAdmin     = admin.body.token;
+  tokenUsuario   = user.body.token;
   tokenEncargado = enc.body.token;
 });
 
 afterAll(() => {
-  db.get('solicitudes').remove((s) => s.motivo.includes('[test]')).write();
+  run("DELETE FROM solicitudes WHERE motivo LIKE ?", ['%[test]%']);
 });
 
 // ─── Acceso sin token ──────────────────────────────────────────────────────────

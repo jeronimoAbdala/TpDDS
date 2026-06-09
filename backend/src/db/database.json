@@ -149,6 +149,16 @@
       "autorizadoPor": null
     },
     {
+      "id": 13,
+      "equipoId": 2,
+      "usuarioId": 3,
+      "fechaRetiro": "2026-06-11",
+      "fechaDevolucion": "2026-06-13",
+      "motivo": "adadasd",
+      "estado": "pendiente",
+      "autorizadoPor": null
+    },
+    {
       "id": 1,
       "equipoId": 1,
       "usuarioId": 1,
@@ -229,12 +239,12 @@
       "autorizadoPor": null
     },
     {
-      "id": 13,
-      "equipoId": 2,
+      "id": 14,
+      "equipoId": 8,
       "usuarioId": 3,
-      "fechaRetiro": "2026-06-11",
-      "fechaDevolucion": "2026-06-13",
-      "motivo": "adadasd",
+      "fechaRetiro": "2026-06-10",
+      "fechaDevolucion": "2026-06-12",
+      "motivo": "Porfavor",
       "estado": "pendiente",
       "autorizadoPor": null
     }
@@ -372,6 +382,15 @@
       "usuarioId": 3,
       "accion": "creacion",
       "fechaHora": "2026-06-09T17:27:07.023Z",
+      "valorAnterior": null,
+      "valorNuevo": "{\"estado\":\"pendiente\"}"
+    },
+    {
+      "id": 16,
+      "solicitudId": 14,
+      "usuarioId": 3,
+      "accion": "creacion",
+      "fechaHora": "2026-06-09T17:53:08.734Z",
       "valorAnterior": null,
       "valorNuevo": "{\"estado\":\"pendiente\"}"
     }

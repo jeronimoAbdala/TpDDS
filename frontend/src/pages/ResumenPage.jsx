@@ -30,7 +30,7 @@ export default function ResumenPage() {
           <section>
             <h2>Equipos disponibles por categoría</h2>
             <div className="resumen-grid">
-              {Object.entries(resumen.equiposPorCategoria ?? {}).map(([cat, count]) => (
+              {Object.entries(resumen.disponiblesPorCategoria ?? {}).map(([cat, count]) => (
                 <ResumenCard key={cat} title={cat} value={count} description="disponibles" />
               ))}
             </div>
@@ -49,7 +49,7 @@ export default function ResumenPage() {
               />
               <ResumenCard
                 title="Préstamos vencidos"
-                value={resumen.vencidos ?? 0}
+                value={resumen.vencidas ?? 0}
               />
             </div>
           </section>

@@ -25,7 +25,7 @@ export default function LoginPage() {
     try {
       if (mode === 'login') {
         const res = await authService.login(form.email, form.password)
-        login(res.data.user, res.data.token)
+        login(res.data.usuario, res.data.token)
         navigate('/solicitudes')
       } else {
         await authService.register(form)

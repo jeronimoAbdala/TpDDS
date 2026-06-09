@@ -72,7 +72,7 @@ export default function SolicitudDetallePage() {
               <dd>{solicitud.id}</dd>
 
               <dt>Equipo</dt>
-              <dd>{solicitud.equipo?.nombre ?? solicitud.equipoId}</dd>
+              <dd>{solicitud.equipoNombre ?? solicitud.equipoId}</dd>
 
               <dt>Fecha de retiro</dt>
               <dd>{solicitud.fechaRetiro}</dd>

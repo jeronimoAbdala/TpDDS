@@ -1,13 +1,17 @@
 const request = require('supertest');
-const app = require('../src/app');
-const db = require('../src/config/database');
+const { createApp } = require('../src/app');
+const { init, run } = require('../src/infrastructure/database/connection');
 
-beforeAll(() => {
-  db.get('usuarios').remove((u) => u.email.endsWith('@test.com')).write();
+let app;
+
+beforeAll(async () => {
+  await init();
+  app = createApp();
+  run('DELETE FROM usuarios WHERE email LIKE ?', ['%@test.com']);
 });
 
 afterAll(() => {
-  db.get('usuarios').remove((u) => u.email.endsWith('@test.com')).write();
+  run('DELETE FROM usuarios WHERE email LIKE ?', ['%@test.com']);
 });
 
 describe('POST /api/auth/register', () => {
