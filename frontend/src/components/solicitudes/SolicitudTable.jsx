@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 const ESTADO_LABELS = {
   pendiente: 'Pendiente',
   aprobada: 'Aprobada',
@@ -8,7 +6,7 @@ const ESTADO_LABELS = {
   devuelta: 'Devuelta',
 }
 
-export default function SolicitudTable({ solicitudes }) {
+export default function SolicitudTable({ solicitudes, onVerDetalle }) {
   return (
     <table className="table">
       <thead>
@@ -22,11 +20,12 @@ export default function SolicitudTable({ solicitudes }) {
           <th>Acciones</th>
         </tr>
       </thead>
+
       <tbody>
         {solicitudes.map((s) => (
           <tr key={s.id}>
             <td>{s.id}</td>
-            <td>{s.equipo?.nombre ?? s.equipoId}</td>
+            <td>{s.equipo?.nombre ?? s.equipoNombre ?? s.equipoId}</td>
             <td>{s.fechaRetiro}</td>
             <td>{s.fechaDevolucion}</td>
             <td>{s.motivo}</td>
@@ -36,7 +35,13 @@ export default function SolicitudTable({ solicitudes }) {
               </span>
             </td>
             <td>
-              <Link to={`/solicitudes/${s.id}`}>Ver detalle</Link>
+              <button
+                type="button"
+                className="link-button"
+                onClick={() => onVerDetalle(s.id)}
+              >
+                Ver detalle
+              </button>
             </td>
           </tr>
         ))}
