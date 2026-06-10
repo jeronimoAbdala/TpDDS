@@ -7,6 +7,7 @@ import SolicitudDetalleModal from '../components/solicitudes/SolicitudDetalleMod
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorMessage from '../components/common/ErrorMessage'
 import EmptyState from '../components/common/EmptyState'
+import PageHero from '../components/common/PageHero'
 
 const INITIAL_FILTERS = {
   estado: '',
@@ -92,16 +93,19 @@ export default function SolicitudesPage() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <h1>Solicitudes</h1>
-
-        <Link
-          to="/solicitudes/nueva"
-          className="btn btn-primary"
-        >
-          + Nueva solicitud
-        </Link>
-      </div>
+      <PageHero
+        eyebrow="Gestión de préstamos"
+        title="Solicitudes"
+        description="Consultá, filtrá y administrá solicitudes de equipamiento."
+        action={
+          <Link
+            to="/solicitudes/nueva"
+            className="btn btn-primary"
+          >
+            + Nueva solicitud
+          </Link>
+        }
+      />
 
       <SolicitudFilters
         filters={filters}

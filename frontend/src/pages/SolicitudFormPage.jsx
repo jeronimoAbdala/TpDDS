@@ -5,6 +5,7 @@ import { equiposService } from '../services/equipos.service'
 import SolicitudForm from '../components/solicitudes/SolicitudForm'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorMessage from '../components/common/ErrorMessage'
+import PageHero from '../components/common/PageHero'
 
 export default function SolicitudFormPage() {
   const { id } = useParams()
@@ -50,10 +51,23 @@ export default function SolicitudFormPage() {
 
   return (
     <div className="page">
-      <div className="page-header">
-        <h1>{isEdit ? 'Editar solicitud' : 'Nueva solicitud'}</h1>
-        <Link to={isEdit ? `/solicitudes/${id}` : '/solicitudes'}>← Cancelar</Link>
-      </div>
+    <PageHero
+  eyebrow="Gestión de préstamos"
+  title={isEdit ? 'Editar solicitud' : 'Nueva solicitud'}
+  description={
+    isEdit
+      ? 'Modificá los datos permitidos de una solicitud pendiente.'
+      : 'Registrá una nueva solicitud de préstamo de equipamiento.'
+  }
+  action={
+    <Link
+      to="/solicitudes"
+      className="btn btn-primary"
+    >
+      ← Volver
+    </Link>
+  }
+/>
 
       <ErrorMessage message={error} />
 

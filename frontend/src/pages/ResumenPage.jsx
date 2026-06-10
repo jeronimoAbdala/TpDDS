@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react'
+import {
+  FiAlertTriangle,
+  FiArchive,
+  FiCheckCircle,
+  FiClock,
+  FiGrid,
+  FiPackage,
+} from 'react-icons/fi'
 import { solicitudesService } from '../services/solicitudes.service'
 import ResumenCard from '../components/resumen/ResumenCard'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ErrorMessage from '../components/common/ErrorMessage'
+import PageHero from '../components/common/PageHero'
 
 export default function ResumenPage() {
   const [resumen, setResumen] = useState(null)
@@ -19,38 +28,83 @@ export default function ResumenPage() {
 
   if (loading) return <LoadingSpinner />
 
+  const disponiblesPorCategoria = resumen?.disponiblesPorCategoria ?? {}
+
   return (
-    <div className="page">
-      <h1>Panel de administración</h1>
+    <div className="page dashboard-page">
+      <PageHero
+        eyebrow="Panel administrativo"
+        title="Resumen operativo"
+        description="Estado general de solicitudes, préstamos y disponibilidad de equipos."
+        icon={<FiGrid />}
+      />
 
       <ErrorMessage message={error} />
 
       {resumen && (
         <>
           <section>
-            <h2>Equipos disponibles por categoría</h2>
-            <div className="resumen-grid">
-              {Object.entries(resumen.disponiblesPorCategoria ?? {}).map(([cat, count]) => (
-                <ResumenCard key={cat} title={cat} value={count} description="disponibles" />
-              ))}
+            <div className="section-header">
+              <div>
+                <h2>Estado general</h2>
+                <p>Indicadores principales del circuito de préstamos.</p>
+              </div>
+            </div>
+
+            <div className="dashboard-kpi-grid">
+              <ResumenCard
+                title="Pendientes"
+                value={resumen.pendientes ?? 0}
+                description="solicitudes por aprobar"
+                icon={<FiClock />}
+                variant="warning"
+              />
+
+              <ResumenCard
+                title="Equipos prestados"
+                value={resumen.prestados ?? 0}
+                description="actualmente en préstamo"
+                icon={<FiArchive />}
+                variant="primary"
+              />
+
+              <ResumenCard
+                title="Préstamos vencidos"
+                value={resumen.vencidas ?? 0}
+                description="requieren seguimiento"
+                icon={<FiAlertTriangle />}
+                variant="danger"
+              />
+
+              <ResumenCard
+                title="Categorías"
+                value={Object.keys(disponiblesPorCategoria).length}
+                description="con equipos disponibles"
+                icon={<FiCheckCircle />}
+                variant="success"
+              />
             </div>
           </section>
 
           <section>
-            <h2>Estado general</h2>
+            <div className="section-header">
+              <div>
+                <h2>Disponibilidad por categoría</h2>
+                <p>Equipos disponibles agrupados por tipo.</p>
+              </div>
+            </div>
+
             <div className="resumen-grid">
-              <ResumenCard
-                title="Pendientes de aprobación"
-                value={resumen.pendientes ?? 0}
-              />
-              <ResumenCard
-                title="Equipos prestados"
-                value={resumen.prestados ?? 0}
-              />
-              <ResumenCard
-                title="Préstamos vencidos"
-                value={resumen.vencidas ?? 0}
-              />
+              {Object.entries(disponiblesPorCategoria).map(([cat, count]) => (
+                <ResumenCard
+                  key={cat}
+                  title={cat}
+                  value={count}
+                  description="disponibles"
+                  icon={<FiPackage />}
+                  variant="neutral"
+                />
+              ))}
             </div>
           </section>
         </>
