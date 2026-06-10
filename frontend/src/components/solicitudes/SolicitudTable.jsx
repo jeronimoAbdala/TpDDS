@@ -1,3 +1,4 @@
+import { FiEye } from 'react-icons/fi'
 const ESTADO_LABELS = {
   pendiente: 'Pendiente',
   aprobada: 'Aprobada',
@@ -37,10 +38,11 @@ export default function SolicitudTable({ solicitudes, onVerDetalle }) {
             <td>
               <button
                 type="button"
-                className="link-button"
+                className="action-icon"
                 onClick={() => onVerDetalle(s.id)}
+                title="Ver detalle"
               >
-                Ver detalle
+                <FiEye />
               </button>
             </td>
           </tr>

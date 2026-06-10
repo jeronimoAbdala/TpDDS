@@ -276,6 +276,12 @@ body {
   text-decoration: underline;
 }
 
+.action-icon {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 /* Badges */
 .badge {
   display: inline-block;
