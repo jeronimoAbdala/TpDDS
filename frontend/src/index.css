@@ -60,12 +60,25 @@ body {
 
 /* Navbar */
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
   background: var(--color-primary);
   color: #fff;
+  padding: 12px 24px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.16);
+}
+
+.navbar-main {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 12px 24px;
+  justify-content: space-between;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .navbar-brand {
@@ -74,41 +87,80 @@ body {
   white-space: nowrap;
 }
 
-.navbar-links {
-  display: flex;
-  gap: 16px;
-  flex: 1;
+.navbar-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 18px;
 }
 
-.navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  opacity: 0.85;
-}
-
-.navbar-links a:hover {
-  opacity: 1;
-}
-
-.navbar-user {
+.navbar-user-desktop {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: auto;
 }
 
-.navbar-user span {
-  opacity: 0.85;
-  font-size: 13px;
+.navbar-user-desktop span {
+  opacity: 0.95;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.navbar-user button {
+.navbar-user-desktop button {
   background: rgba(255, 255, 255, 0.15);
   border: none;
   color: #fff;
-  padding: 4px 12px;
+  padding: 8px 12px;
   border-radius: var(--radius);
   cursor: pointer;
+}
+
+.navbar-user-desktop button:hover,
+.navbar-toggle:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* Sidebar menu */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.25);
+  z-index: 940;
+}
+
+.sidebar-menu {
+  position: fixed;
+  top: 76px;
+  left: 24px;
+  width: 260px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
+  z-index: 950;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-menu a {
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.sidebar-menu a:hover {
+  background: #eff6ff;
+  color: var(--color-primary);
 }
 
 /* Cards */
