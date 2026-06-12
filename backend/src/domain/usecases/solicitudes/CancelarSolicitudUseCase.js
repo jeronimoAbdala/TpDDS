@@ -4,8 +4,9 @@ const { validarTransicion } = require('./_validaciones');
 const ObtenerSolicitudUseCase = require('./ObtenerSolicitudUseCase');
 
 class CancelarSolicitudUseCase {
-  constructor(solicitudRepository, historialRepository) {
+  constructor(solicitudRepository, equipoRepository, historialRepository) {
     this.solicitudRepository = solicitudRepository;
+    this.equipoRepository    = equipoRepository;
     this.historialRepository = historialRepository;
     this.obtenerSolicitud    = new ObtenerSolicitudUseCase(solicitudRepository);
   }
@@ -20,6 +21,9 @@ class CancelarSolicitudUseCase {
     }
 
     await this.solicitudRepository.update(id, { estado: 'cancelada' });
+    if (solicitud.estado === 'aprobada') {
+      await this.equipoRepository.updateEstado(solicitud.equipoId, 'disponible');
+    }
 
     await this.historialRepository.save(new HistorialSolicitud({
       id: null, solicitudId: id, usuarioId: usuarioActual.id, accion: 'cancelacion',

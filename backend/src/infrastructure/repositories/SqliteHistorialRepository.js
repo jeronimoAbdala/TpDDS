@@ -10,7 +10,7 @@ class SqliteHistorialRepository extends IHistorialRepository {
 
   async findBySolicitud(solicitudId) {
     return all(
-      `SELECT h.*, u.nombre AS usuarioNombre
+      `SELECT h.*, u.nombre AS usuarioNombre, u.rol AS usuarioRol, u.email AS usuarioEmail
        FROM historial_solicitudes h
        JOIN usuarios u ON h.usuarioId = u.id
        WHERE h.solicitudId = ?

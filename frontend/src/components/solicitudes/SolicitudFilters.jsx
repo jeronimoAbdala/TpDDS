@@ -1,7 +1,7 @@
 const ESTADOS = ['pendiente', 'aprobada', 'rechazada', 'cancelada', 'devuelta']
 const CATEGORIAS = ['notebook', 'proyector', 'cámara', 'kit de red']
 
-export default function SolicitudFilters({ filters, onChange }) {
+export default function SolicitudFilters({ filters, onChange, equipos = [] }) {
   const handleChange = (e) => {
     onChange({ ...filters, [e.target.name]: e.target.value })
   }
@@ -21,6 +21,17 @@ export default function SolicitudFilters({ filters, onChange }) {
           <option key={c} value={c}>{c}</option>
         ))}
       </select>
+
+      {equipos.length > 0 && (
+        <select name="equipoId" value={filters.equipoId} onChange={handleChange}>
+          <option value="">Todos los equipos</option>
+          {equipos.map((eq) => (
+            <option key={eq.id} value={eq.id}>
+              {eq.nombre} ({eq.categoria})
+            </option>
+          ))}
+        </select>
+      )}
 
       <input
         type="date"

@@ -8,7 +8,7 @@ const EMPTY_FORM = {
   motivo: '',
 }
 
-export default function SolicitudForm({ initialData, equipos, onSubmit, loading, error }) {
+export default function SolicitudForm({ initialData, equipos, onSubmit, loading, error, isEdit = false }) {
   const [form, setForm] = useState({ ...EMPTY_FORM, ...initialData })
 
   useEffect(() => {
@@ -30,7 +30,14 @@ export default function SolicitudForm({ initialData, equipos, onSubmit, loading,
 
       <div className="form-group">
         <label htmlFor="equipoId">Equipo</label>
-        <select id="equipoId" name="equipoId" value={form.equipoId} onChange={handleChange} required>
+        <select
+          id="equipoId"
+          name="equipoId"
+          value={form.equipoId}
+          onChange={handleChange}
+          required
+          disabled={isEdit}
+        >
           <option value="">Seleccionar equipo...</option>
           {equipos.map((eq) => (
             <option key={eq.id} value={eq.id} disabled={eq.estado !== 'disponible'}>
@@ -40,6 +47,7 @@ export default function SolicitudForm({ initialData, equipos, onSubmit, loading,
             </option>
           ))}
         </select>
+        {isEdit && <small style={{ color: 'var(--color-text-muted)' }}>El equipo no puede modificarse</small>}
       </div>
 
       <div className="form-group">
@@ -63,6 +71,7 @@ export default function SolicitudForm({ initialData, equipos, onSubmit, loading,
           value={form.fechaDevolucion}
           onChange={handleChange}
           required
+          min={form.fechaRetiro || undefined}
         />
       </div>
 

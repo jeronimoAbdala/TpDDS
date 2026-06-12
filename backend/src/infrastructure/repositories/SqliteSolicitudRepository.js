@@ -22,18 +22,28 @@ class SqliteSolicitudRepository extends ISolicitudRepository {
     const dir = order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
     const offset = (Number(page) - 1) * Number(limit);
 
-    let sql = SELECT_ENRIQUECIDO + ' WHERE 1=1';
-    const params = [];
-    if (estado)    { sql += ' AND s.estado = ?';           params.push(estado);           }
-    if (equipoId)  { sql += ' AND s.equipoId = ?';         params.push(Number(equipoId)); }
-    if (categoria) { sql += ' AND e.categoria = ?';        params.push(categoria);        }
-    if (desde)     { sql += ' AND s.fechaRetiro >= ?';     params.push(desde);            }
-    if (hasta)     { sql += ' AND s.fechaDevolucion <= ?'; params.push(hasta);            }
+    const WHERE_BASE = `
+      FROM solicitudes s
+      JOIN equipos  e ON s.equipoId  = e.id
+      JOIN usuarios u ON s.usuarioId = u.id
+      WHERE 1=1`;
+    const filterParams = [];
+    let whereExtra = '';
+    if (estado)    { whereExtra += ' AND s.estado = ?';           filterParams.push(estado);           }
+    if (equipoId)  { whereExtra += ' AND s.equipoId = ?';         filterParams.push(Number(equipoId)); }
+    if (categoria) { whereExtra += ' AND e.categoria = ?';        filterParams.push(categoria);        }
+    if (desde)     { whereExtra += ' AND s.fechaRetiro >= ?';     filterParams.push(desde);            }
+    if (hasta)     { whereExtra += ' AND s.fechaDevolucion <= ?'; filterParams.push(hasta);            }
 
-    sql += ` ORDER BY s.${col} ${dir} LIMIT ? OFFSET ?`;
-    params.push(Number(limit), offset);
+    const totalRow = get(`SELECT COUNT(*) AS c ${WHERE_BASE}${whereExtra}`, filterParams);
+    const total = Number(totalRow?.c ?? 0);
 
-    return all(sql, params).map((r) => this._mapear(r));
+    const rows = all(
+      `SELECT s.*, e.nombre AS equipoNombre, e.categoria, u.nombre AS usuarioNombre ${WHERE_BASE}${whereExtra} ORDER BY s.${col} ${dir} LIMIT ? OFFSET ?`,
+      [...filterParams, Number(limit), offset]
+    ).map((r) => this._mapear(r));
+
+    return { data: rows, total, page: Number(page), limit: Number(limit) };
   }
 
   async findById(id) {

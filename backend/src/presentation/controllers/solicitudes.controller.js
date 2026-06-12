@@ -53,7 +53,7 @@ const rechazar = async (req, res, next) => {
 };
 
 const cancelar = async (req, res, next) => {
-  try { res.json(await new CancelarSolicitudUseCase(solicitudRepository, historialRepository).execute(Number(req.params.id), req.user)); }
+  try { res.json(await new CancelarSolicitudUseCase(solicitudRepository, equipoRepository, historialRepository).execute(Number(req.params.id), req.user)); }
   catch (err) { next(err); }
 };
 

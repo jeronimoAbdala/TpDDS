@@ -78,6 +78,7 @@ export default function SolicitudFormPage() {
           onSubmit={handleSubmit}
           loading={submitting}
           error={null}
+          isEdit={isEdit}
         />
       </div>
     </div>

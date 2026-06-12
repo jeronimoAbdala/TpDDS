@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import Navbar from './components/common/Navbar'
+import JwtFooter from './components/common/JwtFooter'
 import ProtectedRoute from './components/common/ProtectedRoute'
 import AdminRoute from './components/common/AdminRoute'
 import LoginPage from './pages/LoginPage'
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
+      <JwtFooter />
     </AuthProvider>
   )
 }
