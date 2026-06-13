@@ -13,6 +13,34 @@ const ESTADO_LABELS = {
   devuelta: 'Devuelta',
 }
 
+const ACCION_LABELS = {
+  creacion: 'Creación',
+  edicion: 'Edición',
+  aprobacion: 'Aprobación',
+  rechazo: 'Rechazo',
+  cancelacion: 'Cancelación',
+  devolucion: 'Devolución',
+}
+
+const ROL_LABELS = { usuario: 'Usuario', encargado: 'Encargado', admin: 'Admin' }
+
+function tryParse(val) {
+  if (!val) return null
+  try { return typeof val === 'string' ? JSON.parse(val) : val } catch { return null }
+}
+
+function formatCambio(accion, anterior, nuevo) {
+  if (accion === 'creacion') return null
+  if (anterior?.estado && nuevo?.estado && anterior.estado !== nuevo.estado)
+    return `${anterior.estado} → ${nuevo.estado}`
+  if (accion === 'edicion' && anterior && nuevo) {
+    const campos = ['fechaRetiro', 'fechaDevolucion', 'motivo']
+    const changed = campos.filter((c) => anterior[c] !== nuevo[c])
+    if (changed.length) return `Cambios en: ${changed.join(', ')}`
+  }
+  return null
+}
+
 export default function SolicitudDetalleModal({ solicitudId, onClose }) {
   const [solicitud, setSolicitud] = useState(null)
   const [historial, setHistorial] = useState([])
@@ -175,14 +203,35 @@ export default function SolicitudDetalleModal({ solicitudId, onClose }) {
                       Sin historial registrado.
                     </div>
                   ) : (
-                    <ul className="historial-list compact">
-                      {historial.map((item) => (
-                        <li key={item.id}>
-                          <strong>{item.accion}</strong>
-                          <span>Usuario {item.usuarioId}</span>
-                          <span>{new Date(item.fechaHora).toLocaleString()}</span>
-                        </li>
-                      ))}
+                    <ul className="historial-list">
+                      {historial.map((item) => {
+                        const anterior = tryParse(item.valorAnterior)
+                        const nuevo = tryParse(item.valorNuevo)
+                        const cambio = formatCambio(item.accion, anterior, nuevo)
+                        return (
+                          <li key={item.id} className="historial-entry">
+                            <div className="historial-entry-main">
+                              <span className={`historial-badge historial-badge-${item.accion}`}>
+                                {ACCION_LABELS[item.accion] ?? item.accion}
+                              </span>
+                              <div className="historial-entry-user">
+                                <strong>{item.usuarioNombre ?? `#${item.usuarioId}`}</strong>
+                                {item.usuarioRol && (
+                                  <span className="historial-rol">
+                                    {ROL_LABELS[item.usuarioRol] ?? item.usuarioRol}
+                                  </span>
+                                )}
+                              </div>
+                              <span className="historial-entry-fecha">
+                                {new Date(item.fechaHora).toLocaleString('es-AR')}
+                              </span>
+                            </div>
+                            {cambio && (
+                              <div className="historial-entry-cambio">{cambio}</div>
+                            )}
+                          </li>
+                        )
+                      })}
                     </ul>
                   )}
                 </>

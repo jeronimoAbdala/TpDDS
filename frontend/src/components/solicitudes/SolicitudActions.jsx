@@ -11,7 +11,7 @@ export default function SolicitudActions({ solicitud, onAction, loading }) {
   const canApprove = isAdmin && solicitud.estado === 'pendiente'
   const canReject = isAdmin && solicitud.estado === 'pendiente'
   const canReturn = isAdmin && solicitud.estado === 'aprobada'
-  const canCancel = isOwner && !['devuelta', 'cancelada'].includes(solicitud.estado)
+  const canCancel = isOwner && !['devuelta', 'cancelada', 'rechazada'].includes(solicitud.estado)
 
   if (!canApprove && !canReject && !canReturn && !canCancel) return null
 
